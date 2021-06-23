@@ -38,12 +38,14 @@
       align-items: center;
       justify-content: space-between;
       .videoControls__playBtn {
-        margin-left: 15px;
+        margin: 0 15px;
       }
-      .videoControls__backBtn {
+      .videoControls__backBtn,
+      .videoControls__forwardBtn {
         margin-right: 10px;
       }
       .videoControls__time {
+        display: flex;
         font-size: 12px;
       }
     }
