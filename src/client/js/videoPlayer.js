@@ -13,6 +13,7 @@ const fullScreenBtn = document.getElementById("fullScreen");
 const fullScreenIcon = fullScreenBtn.querySelector("i");
 const videoContainer = document.getElementById("videoContainer");
 const videoControls = document.getElementById("videoControls");
+const form = document.getElementById("commentForm");
 
 let controlsTimeout = null;
 let controlsMovementTimeout = null;
@@ -134,6 +135,14 @@ const handleKeydown = (event) => {
   }
 };
 
+const handleFocusIn = () => {
+  window.removeEventListener("keydown", handleKeydown);
+};
+
+const handleFocusOut = (event) => {
+  window.addEventListener("keydown", handleKeydown);
+};
+
 const handleEnded = () => {
   const { id } = videoContainer.dataset;
   fetch(`/api/videos/${id}/view`, {
@@ -156,3 +165,8 @@ timeline.addEventListener("input", handleTimelineChange);
 fullScreenBtn.addEventListener("click", handleFullscreen);
 document.addEventListener("fullscreenchange", handleFullscreenChange);
 window.addEventListener("keydown", handleKeydown);
+if (form) {
+  const textarea = form.querySelector("textarea");
+  textarea.addEventListener("focusin", handleFocusIn);
+  textarea.addEventListener("focusout", handleFocusOut);
+}
